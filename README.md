@@ -1,50 +1,93 @@
-# JavaPath — Java Learning Platform
+# JavaPath — MouriTech Java Training Academy
 
-A responsive, no-framework Java learning application built with HTML5, CSS3, and vanilla JavaScript.
+A complete, beginner-friendly Java learning platform built for MouriTech intensive training. Designed for learners from both CS and non-CS backgrounds (ECE, Mechanical Engineering, etc.).
 
-## Run it
+## Features
 
-1. Extract the ZIP file.
-2. Open `index.html` in a modern browser.
-3. For the most consistent local experience, use VS Code's Live Server extension to serve the folder.
+- **36 comprehensive topics** across 7 learning phases
+- **150 assessment questions** with detailed explanations
+- **50 flashcards** for active recall
+- **Code playground** with editable Java examples
+- **Dark/light theme** with responsive design
+- **Search** across topics and assessments
+- **Bookmarks** and **mistake review** system
 
-No backend, package installation, or build step is required. Google Fonts are optional; the app falls back to system fonts if offline.
+## Learning Phases
 
-## Features included
+| Phase | Title | Topics |
+|-------|-------|--------|
+| 1 | Java Fundamentals | Program structure, variables, types, operators, I/O, conditions, loops, arrays, methods, classes |
+| 2 | Object-Oriented Programming | Constructors, static members, encapsulation, inheritance, polymorphism, abstraction, interfaces, final |
+| 3 | Strings, Dates & Exceptions | Strings, StringBuilder, LocalDate, DateTimeFormatter, exception handling |
+| 4 | Collections & Generics | List, Set, Map, implementations, Comparable, Comparator, Optional |
+| 5 | Functional Programming & Streams | Functional interfaces, lambdas, method references, Stream API, Collectors |
+| 6 | Integrated Practice | Employee Management, Contact Manager, billing, sorting, combined exercises |
+| 7 | Professional Foundations | Debugging, clean code, testing basics |
 
-- Responsive dashboard and seven-phase learning roadmap
-- Lesson library with runnable-style Java examples, expected output, explanations, comparisons, and practice tasks
-- Employee Management example as the main learning storyline
-- Search across lesson titles and teaching content
-- Mark lessons complete, bookmark topics, and save personal notes
-- Export personal notes to Markdown
-- Flashcards with flip, shuffle, and Easy/Medium/Hard ratings
-- Multiple-choice quiz with feedback, score history, and revision list
-- Editable code playground with copy/reset controls
-- Light/dark theme, daily study target, and reset option
-- Local progress saved in `localStorage`
+## Assessment Categories
 
-## Important limitations
+- Topic-wise quizzes
+- Mixed Java assessments
+- Output prediction practice
+- OOP & polymorphism assessments
+- Collections & Streams assessments
+- Debugging & error finding
 
-- This initial version shows verified/illustrative expected output; it does **not** compile or execute Java in the browser.
-- Quiz content and lessons are a starter content set based on the supplied build brief. To guarantee every item from `Java_Complete_Revision_Notes.md` is included, that source Markdown file must be added and checked against the topic coverage.
-- Excluded from the learning roadmap as requested: Big O, Git, and JDBC.
-- The app uses Java 17 as the baseline and notes selected Java 11+ APIs where relevant.
+## Tech Stack
 
-## Project structure
+- Pure HTML, CSS, and vanilla JavaScript
+- No frameworks or build tools required
+- Java 17 baseline for all code examples
+- LocalStorage for bookmarks and quiz history
 
-```text
+## How to Run
+
+1. Open `index.html` in any modern browser
+2. Or serve with any local HTTP server:
+   ```
+   npx serve .
+   ```
+
+## Project Structure
+
+```
 java-learning-platform/
-├── index.html
+├── index.html                    # Main HTML entry point
 ├── css/
-│   └── styles.css
-├── js/
-│   └── app.js
+│   └── styles.css                # All styles (responsive, dark/light)
 ├── data/
-│   └── topics.js
+│   ├── topics-phase1.js          # Phase 1: Java Fundamentals (7 topics)
+│   ├── topics-phase2.js          # Phase 2: OOP (7 topics)
+│   ├── topics-phase3.js          # Phase 3: Strings, Dates, Exceptions (4 topics)
+│   ├── topics-phase4.js          # Phase 4: Collections & Generics (6 topics)
+│   ├── topics-phase5.js          # Phase 5: Functional Programming (4 topics)
+│   ├── topics-phase6-7.js        # Phase 6-7: Practice & Professional (8 topics)
+│   ├── assessments.js            # 150 assessment questions
+│   └── flashcards.js             # 50 flashcards
+├── js/
+│   └── app.js                    # Application logic (routing, rendering, state)
 └── README.md
 ```
 
-## Data and privacy
+## Content Philosophy
 
-Learning progress, quiz attempts, bookmarks, ratings, settings, and notes are stored in the browser's localStorage. Reset data from Settings to clear this app's saved state. Avoid saving sensitive information in personal notes.
+- Every topic starts by explaining the **problem** before the concept
+- **Everyday analogies** before technical definitions
+- **Complete runnable code** with expected output
+- **Line-by-line explanations** and execution traces
+- **Common mistakes** with incorrect code, error, and fix
+- **Comparison tables** for related concepts
+- **Practice questions** with hidden solutions
+- **Employee Management** storyline used throughout
+
+## Assignments
+
+The Assignments section is marked "Coming Soon" and is ready for future content additions.
+
+## Notes
+
+- No progress tracking or completion statistics
+- No personal notes feature
+- No external dependencies beyond Google Fonts
+- All content works offline once loaded
+- Code examples are illustrative — Java is not compiled in the browser
