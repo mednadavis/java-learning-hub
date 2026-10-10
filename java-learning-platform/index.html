@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111827">
+  <title>JavaPath — Learn Java by Building</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#" data-page="dashboard" aria-label="JavaPath home">
+        <span class="brand-mark">J<span>+</span></span><span>JavaPath<small>LEARN BY BUILDING</small></span>
+      </a>
+      <div class="sidebar-label">LEARN</div>
+      <nav class="nav-list" aria-label="Main navigation">
+        <button class="nav-item active" data-page="dashboard"><span class="nav-icon">▦</span>Dashboard</button>
+        <button class="nav-item" data-page="roadmap"><span class="nav-icon">⌁</span>Learning roadmap</button>
+        <button class="nav-item" data-page="topics"><span class="nav-icon">▤</span>All topics <span class="nav-count" id="topic-count">0</span></button>
+        <button class="nav-item" data-page="flashcards"><span class="nav-icon">▣</span>Flashcards</button>
+        <button class="nav-item" data-page="practice"><span class="nav-icon">✎</span>Practice & quizzes</button>
+        <button class="nav-item" data-page="playground"><span class="nav-icon">⌘</span>Code playground</button>
+      </nav>
+      <div class="sidebar-label second-label">YOUR SPACE</div>
+      <nav class="nav-list" aria-label="Personal learning">
+        <button class="nav-item" data-page="notes"><span class="nav-icon">▧</span>My notes</button>
+        <button class="nav-item" data-page="review"><span class="nav-icon">↻</span>Review mistakes</button>
+        <button class="nav-item" data-page="progress"><span class="nav-icon">◴</span>Progress</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="streak-card"><div class="streak-icon">✦</div><div><strong>Small steps add up.</strong><p>Learn a little Java every day.</p></div></div>
+        <button class="nav-item" data-page="settings"><span class="nav-icon">⚙</span>Settings</button>
+        <div class="profile"><div class="avatar">JP</div><div><strong>Your learning space</strong><small>Java beginner</small></div><span class="profile-dots">•••</span></div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <button class="mobile-menu" id="mobile-menu" aria-label="Open navigation">☰</button>
+        <div class="breadcrumbs"><span>Workspace</span><span class="crumb-slash">/</span><strong id="crumb-current">Dashboard</strong></div>
+        <div class="top-actions">
+          <label class="search-box"><span>⌕</span><input id="global-search" type="search" placeholder="Search Java concepts..." autocomplete="off"><kbd>⌘ K</kbd></label>
+          <button class="icon-button" id="theme-toggle" title="Toggle light/dark theme" aria-label="Toggle theme">☼</button>
+        </div>
+      </header>
+      <section id="search-results" class="search-results hidden"></section>
+      <div class="page-content" id="page-content" tabindex="-1"></div>
+      <footer class="footer"><span>JavaPath</span><span>Made for focused learning · Java 17 baseline</span></footer>
+    </main>
+  </div>
+  <script src="data/topics.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
