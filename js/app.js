@@ -635,20 +635,86 @@ Salary: 42000.0</div>
     </div>`;
   }
 
-  // ── Assignments (Coming Soon) ──
+  // ── Assignments ──
   function assignmentsPage() {
-    return `${heading("PRACTICAL ASSIGNMENTS", "Assignments — Coming Soon", "Practical assignments will be added in a future update.")}
-    <div class="card card-pad" style="max-width:700px">
-      <div class="empty-state" style="padding:40px 20px">
-        <div class="empty-icon" style="font-size:48px">📋</div>
-        <h2 style="margin:16px 0 8px">Assignments Coming Soon</h2>
-        <p style="max-width:450px;font-size:13px">Practical coding assignments will be added in a future update to this platform. These will include hands-on projects, coding challenges, and real-world scenarios for your MouriTech Java training.</p>
-        <p style="max-width:450px;font-size:12px;margin-top:12px;color:var(--muted)">In the meantime, practice with the assessment questions and integrated projects in Phase 6.</p>
-        <div style="display:flex;gap:8px;justify-content:center;margin-top:20px">
-          <button class="btn btn-primary" data-page="assessments">Try assessments</button>
-          <button class="btn" data-open-topic="employee-management-project">View practice projects</button>
-        </div>
-      </div>
+    const assignments = window.JAVAPATH_ASSIGNMENTS || { mcq: [], practical: [] };
+    
+    return `${heading("PRACTICAL ASSIGNMENTS", "Assignments", "Practice your Java skills with MCQ questions and practical coding exercises with solutions.")}
+    <div class="tabs" id="assignment-tabs">
+      <button class="tab active" data-assignment-tab="mcq">MCQ Assignments (${assignments.mcq.length})</button>
+      <button class="tab" data-assignment-tab="practical">Practical Assignments (${assignments.practical.length})</button>
+    </div>
+    <div id="assignment-content">
+      ${renderMCQAssignments(assignments.mcq)}
+    </div>`;
+  }
+
+  function renderMCQAssignments(mcqAssignments) {
+    if (!mcqAssignments || mcqAssignments.length === 0) {
+      return `<div class="card card-pad"><div class="empty-state"><div class="empty-icon">📋</div><strong>No MCQ assignments available</strong></div></div>`;
+    }
+
+    return `<div class="grid" style="gap:17px">
+      ${mcqAssignments.map((q, idx) => `
+        <section class="card card-pad assignment-item" data-assignment-id="${q.id}">
+          <div class="card-title-row">
+            <span class="pill purple">Question ${idx + 1}</span>
+            <span class="pill">${q.difficulty || 'Medium'}</span>
+          </div>
+          <h3 style="font:600 15px Manrope,sans-serif;margin:0 0 15px;white-space:pre-line">${esc(q.question)}</h3>
+          <div class="answer-list">
+            ${q.options.map((opt, i) => `
+              <div class="answer-option ${i === q.answer ? 'correct-answer' : ''}">
+                <span>${String.fromCharCode(65 + i)}.</span>
+                <span>${esc(opt)}</span>
+                ${i === q.answer ? '<span class="pill green" style="margin-left:auto">✓ Correct</span>' : ''}
+              </div>
+            `).join("")}
+          </div>
+          <div class="feedback correct" style="margin-top:15px">
+            <strong>Solution:</strong>
+            <p style="margin:5px 0 0">${esc(q.explanation)}</p>
+          </div>
+        </section>
+      `).join("")}
+    </div>`;
+  }
+
+  function renderPracticalAssignments(practicalAssignments) {
+    if (!practicalAssignments || practicalAssignments.length === 0) {
+      return `<div class="card card-pad"><div class="empty-state"><div class="empty-icon">💻</div><strong>No practical assignments available</strong></div></div>`;
+    }
+
+    return `<div class="grid" style="gap:17px">
+      ${practicalAssignments.map((p, idx) => `
+        <section class="card card-pad assignment-item" data-assignment-id="${p.id}">
+          <div class="card-title-row">
+            <span class="pill purple">Exercise ${idx + 1}</span>
+            <span class="pill">${p.difficulty || 'Medium'}</span>
+          </div>
+          <h3 style="font:700 16px Manrope,sans-serif;margin:0 0 10px">${esc(p.title)}</h3>
+          <p style="color:var(--muted);font-size:13px;margin:0 0 15px">${esc(p.description)}</p>
+          <div style="margin-bottom:15px">
+            <strong style="font-size:12px">Topics:</strong>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:5px">
+              ${p.topics.map(t => `<span class="pill" style="font-size:10px">${esc(t)}</span>`).join("")}
+            </div>
+          </div>
+          <details>
+            <summary style="padding:12px 16px;background:var(--accent-soft);cursor:pointer;font-weight:600;font-size:13px;color:var(--accent);border-radius:8px">View Solution</summary>
+            <div style="margin-top:15px">
+              <div class="code-block">
+                <div class="code-header"><span>Solution.java</span><button data-copy-code="${encodeURIComponent(p.solution)}">Copy code</button></div>
+                <pre><code>${esc(p.solution)}</code></pre>
+              </div>
+              <div class="callout" style="margin-top:15px">
+                <strong>Explanation:</strong>
+                <p style="margin:5px 0 0">${esc(p.explanation)}</p>
+              </div>
+            </div>
+          </details>
+        </section>
+      `).join("")}
     </div>`;
   }
 
@@ -825,6 +891,22 @@ Salary: 42000.0</div>
       if (grid) {
         grid.innerHTML = filtered.map(topicCard).join("");
         bindOpenTopicCards();
+      }
+    }));
+
+    // Assignment tabs
+    $$("[data-assignment-tab]").forEach(el => el.addEventListener("click", () => {
+      $$("#assignment-tabs .tab").forEach(t => t.classList.toggle("active", t === el));
+      const tab = el.dataset.assignmentTab;
+      const assignments = window.JAVAPATH_ASSIGNMENTS || { mcq: [], practical: [] };
+      const content = $("#assignment-content");
+      if (content) {
+        if (tab === "mcq") {
+          content.innerHTML = renderMCQAssignments(assignments.mcq);
+        } else if (tab === "practical") {
+          content.innerHTML = renderPracticalAssignments(assignments.practical);
+        }
+        bindPageActions();
       }
     }));
 
